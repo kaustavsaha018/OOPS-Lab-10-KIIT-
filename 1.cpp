@@ -1,58 +1,72 @@
 #include <iostream>  
 using namespace std;
+
 class Shape{  
 	protected:  
-    	double x, y;  
-  	public:  
-    	void set_dimension(double i,double j=0) {  
-      		x=i;  
-      		y=j;  
-    	}  
+    		double area;
+  	public:    
     	virtual void show_area(void) {  
-      		cout << "Area cannot be Caluculated!";  
+      		cout << "Area is: "<<area<<endl;
     	}  
 };  
        
-class Triangle : public Shape {  
+class Triangle:public Shape{  
+	protected:
+		double base,height;
 	public:  
-    	void show_area(void){   
+    	Triangle(double base, double height){
+    		this->base=base;
+    		this->height=height;
+		}	
+		void show_area(void){
+			area=0.5*base*height;   
         	cout<<"The area of the triangle is: ";  
-        	cout<<x*0.5*y<<endl;  
+        	cout<<area<<endl;  
       	}  
-  };  
+};  
        
-class Rectangle : public Shape {  
+class Rectangle:public Shape{  
+	protected:
+		double length, breadth;
 	public:  
-    	void show_area(void) {  
+		Rectangle(double length, double breadth){
+			this->breadth=breadth;
+			this->length=length;
+		}		
+    	void show_area(void){
+			area=length*breadth;  
         	cout<<"The area of the rectangle is: ";  
-        	cout<<x*y<<endl;  
+        	cout<<area<<endl;  
         }  
 };  
        
-class Circle : public Shape {  
-	public:  
-    	void show_area(void) {   
+class Circle:public Shape{  
+	protected:
+		double radius;
+	public:
+		Circle(double radius){
+			this->radius=radius;
+		}  	
+    	void show_area(void){   
+    		area=3.14*radius*radius;
         	cout<<"The area of the circle is: ";  
-        	cout<<3.14*x*x;  
+        	cout<<area<<endl;  
       	}  
 };  
        
 int main(){  
-	Shape *ptr;  
-    Triangle t; 
-    Rectangle r;  
-    Circle c; 
+    Shape *ptr;  
+    Triangle t(10.0, 5.0); 
+    Rectangle r(10.0, 5.0);  
+    Circle c(3.0); 
        
     ptr=&t;  
-    ptr->set_dimension(10.0, 5.0);  
     ptr->show_area();  
        
-    ptr=&r;  
-    ptr->set_dimension(10.0, 5.0);  
+    ptr=&r;   
     ptr->show_area();  
        
     ptr=&c;  
-    ptr->set_dimension(3.0);  
     ptr->show_area();  
        
     return 0;  
